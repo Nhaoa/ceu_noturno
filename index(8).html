@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#10091f">
+<meta name="description" content="O céu que marca este momento — uma carta celeste romântica para Amanda.">
+<title>Nosso Céu — Amanda ✦</title>
+<style>
+:root{--bg:#0b0717;--panel:rgba(24,13,44,.78);--line:rgba(235,203,255,.2);--text:#fff5ff;--muted:#c6b5d8;--pink:#ffb4df;--purple:#c7a0ff;--gold:#ffe4ad}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;color:var(--text);font-family:Georgia,'Times New Roman',serif;background:radial-gradient(ellipse at 12% 15%,#3d1857 0,transparent 36%),radial-gradient(ellipse at 88% 35%,#30164e 0,transparent 33%),linear-gradient(155deg,#090612,#170b2a 54%,#080714);min-height:100vh;overflow-x:hidden}
+#dust{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:-1}
+header{max-width:1180px;margin:auto;padding:25px 6%;display:flex;justify-content:space-between;align-items:center;font: .76rem Arial,sans-serif;letter-spacing:.16em;text-transform:uppercase}
+.logo{color:var(--pink)}header a{color:var(--muted);text-decoration:none}
+.hero{min-height:78vh;display:grid;place-items:center;text-align:center;padding:70px 22px 95px;position:relative;isolation:isolate}
+.hero:before,.hero:after{content:"";position:absolute;z-index:-1;border:1px solid rgba(230,194,255,.12);border-radius:50%;width:min(76vw,720px);aspect-ratio:1;top:50%;left:50%;transform:translate(-50%,-50%)}
+.hero:after{width:min(60vw,570px);box-shadow:0 0 80px #a74cff0b,inset 0 0 80px #a74cff0b}
+.kicker{font: .72rem Arial,sans-serif;letter-spacing:.26em;text-transform:uppercase;color:var(--gold)}
+h1{font-weight:normal;font-size:clamp(3rem,8.5vw,7rem);line-height:.97;letter-spacing:-.04em;margin:24px 0}
+h1 em{font-weight:normal;color:var(--pink);text-shadow:0 0 40px #f59bdb40}
+.intro{max-width:670px;margin:0 auto 30px;color:#e0d4eb;font-size:clamp(1.05rem,2vw,1.28rem);line-height:1.8}
+.btn{display:inline-block;background:linear-gradient(110deg,#ffb4df,#d6b1ff);color:#241032;text-decoration:none;border:0;border-radius:99px;padding:14px 22px;font: .75rem Arial,sans-serif;font-weight:bold;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;transition:.2s}
+.btn:hover{transform:translateY(-2px);filter:brightness(1.08)}.btn.secondary{background:transparent;border:1px solid var(--line);color:var(--text)}
+section{max-width:1120px;margin:auto;padding:72px 6%}.sectionhead{text-align:center;margin-bottom:34px}.sectionhead h2{font-size:clamp(2.2rem,5vw,3.8rem);font-weight:normal;margin:13px 0}.sectionhead p{max-width:650px;margin:auto;color:var(--muted);line-height:1.7}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:24px;padding:clamp(16px,3vw,30px);box-shadow:0 28px 90px #0003;backdrop-filter:blur(12px)}
+.mapmeta{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;font: .7rem Arial,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);padding:0 4px 18px}
+.status{color:#b9ffdc}.skybox{position:relative;width:100%;max-width:800px;margin:auto;aspect-ratio:1;background:#070611;border-radius:50%;overflow:hidden;border:1px solid #f1d8ff40;box-shadow:0 0 70px #ad55ff13}
+#sky{width:100%;height:100%;display:block;touch-action:pan-y}
+
+.mapcaption{text-align:center;color:var(--muted);line-height:1.75;font-size:.95rem;max-width:660px;margin:24px auto 0}
+.controls{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:20px}
+label{display:block;font: .7rem Arial,sans-serif;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-bottom:8px}
+input{width:100%;padding:12px 13px;background:#0d091a;color:var(--text);border:1px solid var(--line);border-radius:10px;font:1rem Arial,sans-serif}
+.control-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}.hint{font: .76rem Arial,sans-serif;color:#aa9cbd;line-height:1.6;margin-top:14px}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.card{border:1px solid var(--line);border-radius:18px;padding:24px;background:#1a1030a8}.icon{font-size:1.8rem;color:var(--pink)}.card h3{font-size:1.35rem;font-weight:normal;margin:14px 0 9px}.card p{margin:0;color:var(--muted);line-height:1.7}
+.quote{text-align:center;max-width:800px;margin:auto;padding:25px 0 75px}.quote blockquote{font-size:clamp(1.6rem,4vw,3.1rem);line-height:1.4;margin:20px 0;color:#ffe9f7}.quote cite{font: .72rem Arial,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);font-style:normal}
+footer{text-align:center;padding:30px 20px 45px;color:#9e8eb4;font: .7rem Arial,sans-serif;letter-spacing:.08em;line-height:1.8}
+@media(max-width:700px){header{padding:20px 6%}.hero{min-height:72vh;padding-top:60px}.cards{grid-template-columns:1fr}.controls{grid-template-columns:1fr 1fr}section{padding-top:55px;padding-bottom:55px}.mapmeta{font-size:.62rem}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+</style>
+</head>
+<body>
+<canvas id="dust" aria-hidden="true"></canvas>
+<header><div class="logo">✦ Nosso Céu</div><a href="#ceu">O céu de agora ↓</a></header>
+<main>
+<section class="hero">
+<div>
+<div class="kicker">Para Amanda, minha Princesa</div>
+<h1>O céu que marca<br><em>este momento.</em></h1>
+<p class="intro">Amanda, entre tantas estrelas e tantos caminhos possíveis, a vida me deu a sorte de encontrar você. Este pequeno universo é um jeito de guardar o agora — e de lembrar que, em qualquer constelação, meu pensamento sempre encontra o caminho de volta até você.</p>
+<a class="btn" href="#ceu">Encontrar nosso céu ✦</a>
+</div>
+</section>
+<section id="ceu">
+<div class="sectionhead"><div class="kicker">Uma janela para o universo</div><h2>O céu de agora</h2><p>As estrelas têm sua própria história. A nossa também está sendo escrita, um instante bonito de cada vez.</p></div>
+<div class="panel">
+<div class="mapmeta"><span>✧ Carta celeste interativa</span><span id="date">Calculando o momento…</span><span id="status" class="status">Preparando o céu</span></div>
+<div class="skybox"><canvas id="sky" aria-label="Mapa interativo do céu estrelado"></canvas></div>
+<p class="mapcaption" id="mapcaption">Estrelas reais, linhas das constelações e posições planetárias calculadas para a data, hora e localização selecionadas. Arraste para explorar o céu.</p>
+<div class="controls">
+<div><label for="lat">Latitude</label><input id="lat" type="number" step="0.0001" value="-1.2939"></div>
+<div><label for="lon">Longitude</label><input id="lon" type="number" step="0.0001" value="-47.9264"></div>
+<div><label for="when">Data e hora local</label><input id="when" type="datetime-local"></div>
+</div>
+<div class="control-actions"><button class="btn" id="apply">Atualizar o céu</button><button class="btn secondary" id="now">Voltar para agora</button></div>
+<p class="hint">Local inicial: Castanhal, Pará, Brasil (coordenadas aproximadas). Ajuste latitude e longitude para o ponto de observação desejado. O mapa precisa de conexão com a internet para carregar o catálogo de estrelas e o motor astronômico externo.</p>
+</div>
+</section>
+<section>
+<div class="sectionhead"><div class="kicker">Lembretes do coração</div><h2>Para minha Princesa</h2></div>
+<div class="cards">
+<article class="card"><div class="icon">☾</div><h3>Quando a noite chegar</h3><p>Se algum dia tudo parecer escuro, lembra que você não precisa iluminar o mundo inteiro sozinha. Quero estar aqui, segurando sua mão.</p></article>
+<article class="card"><div class="icon">✧</div><h3>Entre bilhões de estrelas</h3><p>O universo é imenso, mas meu acaso favorito foi cruzar o seu caminho. Nenhuma distância transforma isso em algo pequeno.</p></article>
+<article class="card"><div class="icon">♡</div><h3>O meu lugar favorito</h3><p>Não é uma galáxia distante nem um planeta perfeito. É qualquer lugar em que eu possa estar com você, Amanda.</p></article>
+</div>
+</section>
+<div class="quote"><blockquote>“Se eu pudesse pedir uma coisa ao universo, pediria mais tempo para viver todas as pequenas felicidades ao seu lado.”</blockquote></div>
+</main>
+<!-- SkyEngine: catálogo estelar e planetário calculado no navegador. -->
+<script src="https://cdn.jsdelivr.net/gh/drakkB/skyengine@main/sky-data.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/drakkB/skyengine@main/sky-engine.js"></script>
+<script>
+const dust=document.getElementById('dust'),dctx=dust.getContext('2d');let particles=[];
+function resizeDust(){const dpr=Math.min(devicePixelRatio||1,2);dust.width=innerWidth*dpr;dust.height=innerHeight*dpr;dust.style.width=innerWidth+'px';dust.style.height=innerHeight+'px';dctx.setTransform(dpr,0,0,dpr,0,0);particles=Array.from({length:Math.min(180,Math.floor(innerWidth*innerHeight/6500))},()=>({x:Math.random()*innerWidth,y:Math.random()*innerHeight,r:Math.random()*1.4+.2,p:Math.random()*6.28,a:.2+Math.random()*.6}))}
+function twinkle(t=0){dctx.clearRect(0,0,innerWidth,innerHeight);for(const s of particles){dctx.fillStyle=`rgba(247,220,255,${s.a*(.7+.3*Math.sin(t*.0008+s.p))})`;dctx.beginPath();dctx.arc(s.x,s.y,s.r,0,7);dctx.fill()}requestAnimationFrame(twinkle)}addEventListener('resize',resizeDust);resizeDust();twinkle();
+const dateEl=document.getElementById('date'),statusEl=document.getElementById('status'),when=document.getElementById('when');
+function localInputValue(d){const p=n=>String(n).padStart(2,'0');return `${d.getFullYear()}-${p(d.getMonth()+1)}-${p(d.getDate())}T${p(d.getHours())}:${p(d.getMinutes())}`}
+function showDate(){const d=when.value?new Date(when.value):new Date();dateEl.textContent=new Intl.DateTimeFormat('pt-BR',{dateStyle:'medium',timeStyle:'short'}).format(d)}
+when.value=localInputValue(new Date());showDate();
+let engine=null,skyReady=false,initialCameraPositioned=false;
+function initSky(){
+ try{
+  if(typeof SKY === 'undefined' || typeof SkyEngine === 'undefined')throw new Error('O motor astronômico não carregou.');
+  const canvas=document.getElementById('sky');
+  engine=new SkyEngine(canvas,SKY,{conNameKey:'e',planets:true});engine.start();skyReady=true;
+  // Exibe linhas e nomes das constelações, nomes de estrelas, planetas e Via Láctea.
+  engine.set('constellations', true); // linhas e nomes das constelações
+  engine.set('labels', true);          // nomes das estrelas
+  engine.set('planets', true);         // Sol, Lua e planetas
+  engine.set('milkyway', true);        // faixa da Via Láctea
+  statusEl.textContent='Catálogo carregado';statusEl.style.color='#b9ffdc';
+  setHorizon();
+ }catch(e){
+  statusEl.textContent='Não foi possível carregar';statusEl.style.color='#ffb4df';
+  drawFallback();document.getElementById('mapcaption').textContent='O motor astronômico não carregou. Confira sua conexão ou tente novamente. O desenho exibido é apenas decorativo e não representa posições reais.';
+ }
+}
+function setHorizon(){
+ if(!engine)return;
+ const lat=Number(document.getElementById('lat').value),lon=Number(document.getElementById('lon').value);
+ const d=when.value?new Date(when.value):new Date();
+ if(!Number.isFinite(lat)||!Number.isFinite(lon)||lat < -90||lat>90||lon < -180||lon>180){statusEl.textContent='Confira latitude/longitude';return}
+ try{
+  engine.setHorizon(lat,lon,d);
+  if(engine.setDate)engine.setDate(d);
+  // Na primeira abertura, começa praticamente no zênite (90° para cima).
+  // O SkyEngine limita a câmera a 89°, então usamos o máximo permitido.
+  if(!initialCameraPositioned){engine.lookAtAltAz(0,89);initialCameraPositioned=true;}
+  showDate();statusEl.textContent='Céu calculado';statusEl.style.color='#b9ffdc'
+ }catch(e){statusEl.textContent='Erro ao calcular o céu';}
+}
+document.getElementById('apply').addEventListener('click',setHorizon);
+document.getElementById('now').addEventListener('click',()=>{when.value=localInputValue(new Date());showDate();setHorizon()});
+when.addEventListener('change',showDate);
+function drawFallback(){const c=document.getElementById('sky'),ctx=c.getContext('2d'),w=c.width=c.clientWidth*devicePixelRatio,h=c.height=c.clientHeight*devicePixelRatio;ctx.scale(devicePixelRatio,devicePixelRatio);let r=Math.min(c.clientWidth,c.clientHeight)/2;ctx.fillStyle='#080612';ctx.fillRect(0,0,c.clientWidth,c.clientHeight);for(let i=0;i<240;i++){let x=Math.random()*c.clientWidth,y=Math.random()*c.clientHeight;ctx.fillStyle=`rgba(250,225,255,${Math.random()*.8})`;ctx.beginPath();ctx.arc(x,y,Math.random()*1.5,0,7);ctx.fill()}ctx.strokeStyle='#d7aaff88';ctx.beginPath();ctx.arc(c.clientWidth/2,c.clientHeight/2,r*.8,0,7);ctx.stroke();ctx.fillStyle='#ffd7f1';ctx.font='30px Georgia';ctx.textAlign='center';ctx.fillText('♡',c.clientWidth/2,c.clientHeight/2+10)}
+initSky();
+</script>
+</body></html>
