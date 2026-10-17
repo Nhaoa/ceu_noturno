@@ -381,34 +381,127 @@
       margin-top: 14px;
     }
 
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
+    /* ==========================================================================
+       CARROSSEL DE CARDS (TEXTOS MAIORES, CENTRALIZADOS E COM SETAS)
+       ========================================================================== */
+    .cards-carousel {
+      position: relative;
+      max-width: 880px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 18px;
+    }
+
+    .cards-viewport {
+      width: 100%;
+      position: relative;
     }
 
     .card {
+      display: none;
       border: 1px solid var(--line);
-      border-radius: 18px;
-      padding: 24px;
-      background: #1a1030a8;
+      border-radius: 26px;
+      padding: clamp(32px, 6vw, 58px) clamp(24px, 6vw, 64px);
+      background: rgba(26, 16, 48, .76);
+      box-shadow: 0 28px 90px #0004, inset 0 0 40px rgba(199, 160, 255, .05);
+      backdrop-filter: blur(12px);
+      text-align: center;
+      animation: cardFadeIn .55s ease;
+    }
+
+    .card.active {
+      display: block;
+    }
+
+    @keyframes cardFadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px) scale(.985);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
     }
 
     .icon {
-      font-size: 1.8rem;
+      font-size: 2.5rem;
       color: var(--pink);
+      text-shadow: 0 0 24px rgba(255, 180, 223, .45);
     }
 
     .card h3 {
-      font-size: 1.35rem;
+      font-size: clamp(1.65rem, 3.6vw, 2.35rem);
       font-weight: normal;
-      margin: 14px 0 9px;
+      color: var(--text);
+      margin: 16px 0 18px;
     }
 
     .card p {
-      margin: 0;
-      color: var(--muted);
-      line-height: 1.7;
+      max-width: 650px;
+      margin: 0 auto;
+      color: #ede2f8;
+      font-size: clamp(1.12rem, 2.2vw, 1.38rem);
+      line-height: 1.85;
+    }
+
+    .carousel-arrow {
+      flex-shrink: 0;
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      border: 1px solid var(--line);
+      background: rgba(24, 13, 44, .88);
+      color: var(--pink);
+      font-size: 1.35rem;
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+      transition: transform .2s ease, background .2s ease, border-color .2s ease;
+      box-shadow: 0 10px 30px #0004;
+      user-select: none;
+    }
+
+    .carousel-arrow:hover {
+      background: rgba(255, 180, 223, .16);
+      border-color: var(--pink);
+      transform: scale(1.07);
+    }
+
+    .carousel-arrow:active {
+      transform: scale(.96);
+    }
+
+    .carousel-nav-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      margin-top: 22px;
+    }
+
+    .carousel-dots {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .carousel-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 99px;
+      border: 0;
+      padding: 0;
+      background: rgba(235, 203, 255, .28);
+      cursor: pointer;
+      transition: width .25s ease, background .25s ease;
+    }
+
+    .carousel-dot.active {
+      width: 26px;
+      background: var(--pink);
     }
 
     .quote {
@@ -445,15 +538,26 @@
     @media (max-width: 700px) {
       header { padding: 20px 6%; }
       .hero { min-height: 72vh; padding-top: 60px; }
-      .cards { grid-template-columns: 1fr; }
       .controls { grid-template-columns: 1fr 1fr; }
       section { padding-top: 55px; padding-bottom: 55px; }
       .mapmeta { font-size: .62rem; }
+      .cards-carousel {
+        flex-wrap: wrap;
+        gap: 14px;
+      }
+      .cards-viewport {
+        order: 1;
+      }
+      .carousel-arrow {
+        order: 2;
+        width: 46px;
+        height: 46px;
+      }
     }
 
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
-      * { transition: none !important; }
+      * { transition: none !important; animation: none !important; }
     }
   </style>
 </head>
@@ -470,7 +574,7 @@
 
       <!-- [EDITAR TEXTO] Mensagem ao final da viagem espacial -->
       <h2 id="intro-title">A viagem terminou…</h2>
-      <p id="intro-text">Há uma ultima surpresa guardada</p>
+      <p id="intro-text">Há uma última surpresa guardada</p>
       <div class="tap-hint" id="intro-hint">Toque para ver</div>
 
     </div>
@@ -551,7 +655,7 @@
         </div>
 
         <p class="hint">
-          Local inicial: Castanhal, Pará, Brasil . Ajuste latitude e longitude para o ponto de observação desejado. O mapa precisa de conexão com a internet para carregar o catálogo de estrelas e o motor astronômico externo.
+          Local inicial: Castanhal, Pará, Brasil. Ajuste latitude e longitude para o ponto de observação desejado. O mapa precisa de conexão com a internet para carregar o catálogo de estrelas e o motor astronômico externo.
         </p>
       </div>
     </section>
@@ -565,36 +669,49 @@
         <h2>Para minha Princesa</h2>
       </div>
 
-      <div class="cards">
+      <div class="cards-carousel" aria-roledescription="carrossel">
+        <button class="carousel-arrow" id="prev-card" type="button" aria-label="Lembrete anterior">&#8592;</button>
 
-        <!-- [EDITAR TEXTO] Card 1 -->
-        <article class="card">
-          <div class="icon">☾</div>
-          <h3>Cada detalhe do seu céu</h3>
-          <p>
-            Assim como os grandes observadores, busco identificar e guardar cada constelação sua, porque é a união de todas elas que revela o universo lindo que você é. Há dias de céu limpo e fácil de contemplar, mas também há dias completamente nublados, como se as nuvens tentassem esconder você de mim. Mesmo assim, aos poucos, vou te conhecendo melhor — e quero continuar até acolher tudo o que é seu: tanto as partes luminosas quanto os cantos tristes e doloridos desse seu céu.
-          </p>
-        </article>
+        <div class="cards-viewport" id="cards-viewport" aria-live="polite">
 
-        <!-- [EDITAR TEXTO] Card 2 -->
-        <article class="card">
-          <div class="icon">✧</div>
-          <h3>Quando o seu céu se abre</h3>
-          <p>
-            Toda espera vale a pena quando as nuvens se dissipam e você me deixa ver quem realmente é. Basta um gesto espontâneo ou uma risada sua para que qualquer noite fria ganhe calor. Os astrônomos passam a vida procurando grandes fenômenos no espaço, mas a minha maior descoberta sempre será a sorte de assistir de perto a beleza de cada detalhe seu.
-          </p>
-        </article>
+          <!-- [EDITAR TEXTO] Card 1 -->
+          <article class="card active">
+            <div class="icon">☾</div>
+            <h3>Cada detalhe do seu céu</h3>
+            <p>
+              Assim como os grandes observadores, busco identificar e guardar cada constelação sua, porque é a união de todas elas que revela o universo lindo que você é. Há dias de céu limpo e fácil de contemplar, mas também há dias completamente nublados, como se as nuvens tentassem esconder você de mim. Mesmo assim, aos poucos, vou te conhecendo melhor — e quero continuar até acolher tudo o que é seu: tanto as partes luminosas quanto os cantos tristes e doloridos desse seu céu.
+            </p>
+          </article>
 
-        <!-- [EDITAR TEXTO] Card 3 -->
-        <!-- [EDITAR TEXTO] Card 3 -->
-        <article class="card">
-          <div class="icon">♡</div>
-          <h3>Por inteiro, sem reservas</h3>
-          <p>
-            Depois de tanto procurar beleza nas alturas, descobri que o meu lugar favorito não fica em nenhuma galáxia distante — fica bem aqui na Terra, ao meu lado neste exato momento: em você, bb. Nenhuma estrela brilha igual todos os dias, e você não precisa ser forte ou perfeita o tempo todo perto de mim. Eu não me encantei por uma versão idealizada sua e meu carinho não é frágil: estou aqui para ouvir, acolher e amar você por inteiro, exatamente como você é.
-          </p>
-        </article>
+          <!-- [EDITAR TEXTO] Card 2 -->
+          <article class="card">
+            <div class="icon">✧</div>
+            <h3>Quando o seu céu se abre</h3>
+            <p>
+              Toda espera vale a pena quando as nuvens se dissipam e você me deixa ver quem realmente é. Basta um gesto espontâneo ou uma risada sua para que qualquer noite fria ganhe calor. Os astrônomos passam a vida procurando grandes fenômenos no espaço, mas a minha maior descoberta sempre será a sorte de assistir de perto a beleza de cada detalhe seu.
+            </p>
+          </article>
 
+          <!-- [EDITAR TEXTO] Card 3 -->
+          <article class="card">
+            <div class="icon">♡</div>
+            <h3>Por inteiro, sem reservas</h3>
+            <p>
+              Depois de tanto procurar beleza nas alturas, descobri que o meu lugar favorito não fica em nenhuma galáxia distante — fica bem aqui na Terra, ao meu lado neste exato momento: em você, bb. Nenhuma estrela brilha igual todos os dias, e você não precisa ser forte ou perfeita o tempo todo perto de mim. Eu não me encantei por uma versão idealizada sua e meu carinho não é frágil: estou aqui para ouvir, acolher e amar você por inteiro, exatamente como você é.
+            </p>
+          </article>
+
+        </div>
+
+        <button class="carousel-arrow" id="next-card" type="button" aria-label="Próximo lembrete">&#8594;</button>
+      </div>
+
+      <div class="carousel-nav-bottom">
+        <div class="carousel-dots" id="carousel-dots" aria-label="Indicadores de lembretes">
+          <button class="carousel-dot active" type="button" data-index="0" aria-label="Ir para o lembrete 1"></button>
+          <button class="carousel-dot" type="button" data-index="1" aria-label="Ir para o lembrete 2"></button>
+          <button class="carousel-dot" type="button" data-index="2" aria-label="Ir para o lembrete 3"></button>
+        </div>
       </div>
     </section>
 
@@ -945,7 +1062,7 @@
     })();
   </script>
 
-  <!-- Script 2: Poeira Estelar de Fundo + Mapa Celeste (Nosso Céu) -->
+  <!-- Script 2: Poeira Estelar + Mapa Celeste + Carrossel de Cards -->
   <script>
     const dust = document.getElementById('dust'), dctx = dust.getContext('2d');
     let particles = [];
@@ -1080,6 +1197,41 @@
     }
 
     initSky();
+
+    /* Controle do Carrossel de Cards */
+    (() => {
+      const cards = Array.from(document.querySelectorAll('#cards-viewport .card'));
+      const dots = Array.from(document.querySelectorAll('#carousel-dots .carousel-dot'));
+      const prevBtn = document.getElementById('prev-card');
+      const nextBtn = document.getElementById('next-card');
+      const viewport = document.getElementById('cards-viewport');
+      let currentCard = 0;
+
+      function showCard(index) {
+        currentCard = (index + cards.length) % cards.length;
+        cards.forEach((card, i) => card.classList.toggle('active', i === currentCard));
+        dots.forEach((dot, i) => dot.classList.toggle('active', i === currentCard));
+      }
+
+      prevBtn.addEventListener('click', () => showCard(currentCard - 1));
+      nextBtn.addEventListener('click', () => showCard(currentCard + 1));
+      dots.forEach(dot => {
+        dot.addEventListener('click', () => showCard(Number(dot.dataset.index)));
+      });
+
+      /* Suporte a gesto de deslizar (swipe) no celular */
+      let touchStartX = 0;
+      viewport.addEventListener('touchstart', e => {
+        touchStartX = e.changedTouches[0].screenX;
+      }, { passive: true });
+
+      viewport.addEventListener('touchend', e => {
+        const diff = e.changedTouches[0].screenX - touchStartX;
+        if (Math.abs(diff) > 45) {
+          showCard(diff < 0 ? currentCard + 1 : currentCard - 1);
+        }
+      }, { passive: true });
+    })();
   </script>
 </body>
 </html>
