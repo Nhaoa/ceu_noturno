@@ -971,17 +971,34 @@
         overlay.classList.add('waiting-to-continue');
       }
 
-      function enterMainSite() {
-        if (!waitingForContinue || introFinished) return;
-        waitingForContinue = false;
-        overlay.classList.add('is-hidden');
-        document.body.classList.remove('intro-lock');
 
-        window.setTimeout(() => {
-          introFinished = true;
-          ctx.clearRect(0, 0, width, height);
-        }, 1550);
-      }
+function enterMainSite() {
+  if (!waitingForContinue || introFinished) return;
+
+  waitingForContinue = false;
+
+  // Garante que o conteúdo principal abra do começo
+  window.scrollTo({
+    top: 0,
+    left: 0,
+    behavior: 'instant'
+  });
+
+  overlay.classList.add('is-hidden');
+  document.body.classList.remove('intro-lock');
+
+  // Reforça a posição após a transição da introdução
+  window.setTimeout(() => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'instant'
+    });
+
+    introFinished = true;
+    ctx.clearRect(0, 0, width, height);
+  }, 1550);
+}
 
       function drawIntro(now) {
         if (introFinished) return;
@@ -1064,7 +1081,22 @@
 
   <!-- Script 2: Poeira Estelar + Mapa Celeste + Carrossel de Cards -->
   <script>
-    const dust = document.getElementById('dust'), dctx = dust.getContext('2d');
+    
+/* Garante que o site comece sempre do topo */
+if ('scrollRestoration' in history) {
+  history.scrollRestoration = 'manual';
+}
+
+window.scrollTo(0, 0);
+
+window.addEventListener('pageshow', () => {
+  window.scrollTo(0, 0);
+});
+
+/* Poeira estelar */
+const dust = document.getElementById('dust'),
+      dctx = dust.getContext('2d');
+
     let particles = [];
 
     function resizeDust() {
